@@ -6,7 +6,7 @@ function Shop () {
   const state = useSelector(state => state)
 
   return (
-    <Layout>
+    <Layout title="拉钩严选商城列表" subTitle="挑选你喜欢的商品吧">
       Shop  {JSON.stringify(state)}
     </Layout>
   )

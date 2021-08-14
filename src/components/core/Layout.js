@@ -1,8 +1,8 @@
-import { Menu } from 'antd';
-import { useSelector } from 'react-redux'
 import React from 'react';
+import { Menu, PageHeader } from 'antd';
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-function Layout ({children}) {
+function Layout ({children, title, subTitle}) {
   const router = useSelector(state => state.router)
   return (
     <div>
@@ -14,7 +14,11 @@ function Layout ({children}) {
           <Link to="/shop">商城</Link>
         </Menu.Item>
       </Menu>
-      Layout {children}
+      <PageHeader
+        className="site-page-header jumbotron"
+        title={title}
+        subTitle={subTitle}/>
+      {children}
     </div>
   )
 }
