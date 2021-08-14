@@ -13,12 +13,20 @@ function Layout ({children, title, subTitle}) {
         <Menu.Item key="/shop">
           <Link to="/shop">商城</Link>
         </Menu.Item>
+        <Menu.Item key="/signin">
+          <Link to="/signin">登录</Link>
+        </Menu.Item>
+        <Menu.Item key="/signup">
+          <Link to="/signup">注册</Link>
+        </Menu.Item>
       </Menu>
       <PageHeader
         className="site-page-header jumbotron"
         title={title}
         subTitle={subTitle}/>
-      {children}
+      <div className="center-container">
+        {children}
+      </div>
     </div>
   )
 }
