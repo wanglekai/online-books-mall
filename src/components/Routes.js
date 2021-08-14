@@ -1,5 +1,5 @@
+import React from 'react';
 import {
-  BrowserRouter,
   Switch,
   Route
 } from 'react-router-dom'
@@ -8,12 +8,10 @@ import Shop from './core/Shop';
 
 function Routes () {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/shop" component={Shop} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route path="/" component={Home} exact />
+      <Route path="/shop" component={Shop} />
+    </Switch>
   )
 }
 export default Routes;
