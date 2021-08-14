@@ -1,6 +1,6 @@
-import { all } from "@redux-saga/core/effects";
+import { all } from "redux-saga/effects";
 import signupSage from "./signup";
 
 export default function* rootSage() {
-  yield all([signupSage])
+  yield all([signupSage()])
 }

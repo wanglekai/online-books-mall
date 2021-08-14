@@ -1,11 +1,18 @@
 import React from 'react';
 import Layout from "./Layout";
 import { Form, Input, Button } from 'antd';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../store/actions/signup';
 
 function Signup () {
+  const dispath = useDispatch()
+  const handleOnFinish = values => {
+    console.log(values)
+    dispath(signup(values))
+  }
   return (
     <Layout title="注册" subTitle="">
-      <Form>
+      <Form onFinish={handleOnFinish}>
         <Form.Item name="name" label="昵称">
           <Input />
         </Form.Item>
