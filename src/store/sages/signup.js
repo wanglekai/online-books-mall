@@ -7,9 +7,9 @@ function* handleSignup (action) {
   try {
     yield axios.post(`${API}/signup`, action.payload)
     yield put(signup_success())
-  } catch (error) {
+  } catch (ex) {
     yield put(signup_fail({
-      message: '注册失败'
+      message: ex.response.data.error
     }))
   }
 }

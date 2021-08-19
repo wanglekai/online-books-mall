@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions"
 import {
-  signup, signup_fail, signup_success
+  signup, signup_fail, signup_success, signup_reset
 } from '../actions/signup'
 
 const initialState = {
@@ -32,7 +32,15 @@ const signupReducer = handleActions({
       loading: false,
       loaded: true,
       success: false,
-      messgae: action.payload.messgae
+      message: action.payload.message
+    }
+  },
+  [signup_reset]: () => {
+    return {
+      loading: false,
+      loaded: false,
+      success: false,
+      messgae: ''
     }
   }
 }, initialState)
