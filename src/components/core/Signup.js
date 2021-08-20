@@ -13,8 +13,6 @@ function Signup () {
   // 获取状态
   const { loading, loaded, success, message } = useSelector(state => state.signup)
 
-  let isShow = true
-
   // 提交表单
   const handleOnFinish = values => {
     dispath(signup(values))
@@ -30,11 +28,8 @@ function Signup () {
   // 注册成功，清空表单
   useEffect(() => {
     if (loaded && success) {
-      // console.log('注册成功');
-      // Form.useForm().rese
       form.resetFields()
     }
-    // console.log(loaded, success);
   },[loaded, success])
 
   // 注册成功，显示成功提示信息
@@ -59,7 +54,18 @@ function Signup () {
         <Result
           status="error"
           title="错误"
-          subTitle={message} />
+          subTitle={message}
+          extra={[
+            <Button 
+              type="primary" 
+              key="console"
+              onClick={()=>{
+                form.resetFields()
+                dispath(signup_reset())
+              }}>
+              返回注册
+            </Button>
+          ]} />
       )
     }
   }
@@ -95,7 +101,7 @@ function Signup () {
       {showLoading()}
       {showSuccess()}
       {showError()}
-      {signupForm()}
+      {!loaded ? signupForm() : null}
     </Layout>
   )
 }
