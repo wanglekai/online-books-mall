@@ -25,7 +25,7 @@ function AdminDashboard () {
                 </Menu.Item>
                 <Menu.Item>
                     <UserOutlined />
-                    <Link to="/addItem">添加商品</Link>
+                    <Link to="/create/product">添加商品</Link>
                 </Menu.Item>
                 <Menu.Item>
                     <OrderedListOutlined />
