@@ -9,3 +9,6 @@ export const createCategory = data => {
         }
     })
 }
+export const getCategories = () => {
+    return request.get('/categories')
+}
