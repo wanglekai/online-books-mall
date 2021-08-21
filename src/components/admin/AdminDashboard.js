@@ -21,15 +21,15 @@ function AdminDashboard () {
             <Menu>
                 <Menu.Item>
                     <ShoppingCartOutlined />
-                    <Link>添加分类</Link>
+                    <Link to="/create/category">添加分类</Link>
                 </Menu.Item>
                 <Menu.Item>
                     <UserOutlined />
-                    <Link>添加商品</Link>
+                    <Link to="/addItem">添加商品</Link>
                 </Menu.Item>
                 <Menu.Item>
                     <OrderedListOutlined />
-                    <Link>订单列表</Link>
+                    <Link to="/orders">订单列表</Link>
                 </Menu.Item>
             </Menu>
         </>

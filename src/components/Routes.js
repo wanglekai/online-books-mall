@@ -11,6 +11,7 @@ import Home from './core/Home';
 import Shop from './core/Shop';
 import Signin from './core/Signin';
 import Signup from './core/Signup';
+import AddCategory from './admin/AddCategory';
 
 function Routes () {
   return (
@@ -21,6 +22,7 @@ function Routes () {
       <Route path="/signup" component={Signup} />
       <PrivateAdmin path="/admin/dashboard" component={AdminDashboard} />
       <PrivateUser path="/user/dashboard" component={UserDashboard} />
+      <Route path="/create/category" component={AddCategory} />
     </Switch>
   )
 }
