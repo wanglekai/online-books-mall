@@ -1,58 +1,87 @@
 import { UploadOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Select, Upload } from 'antd'
+import { Button, Form, Input, Select, Upload, Result, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getCategories } from '../../services/admin'
+import { createProduct, getCategories } from '../../services/admin'
 import Layout from '../core/Layout'
-
-const { Option } = Select
 
 function AddProduct () {
 
     const [categories, setCategories] = useState([])
+    const [form] = Form.useForm()
+    const [file, setFile] = useState()
+    const [added, setAdded] = useState(false)
+    const props = {
+        beforeUpload (file) {
+            // console.log(file);
+            setFile(file)
+            return false
+        }
+    }
+    const onFinish = values => {
+        // console.log(values);
+        const formData = new FormData()
+        for (let attr in values) {
+            formData.append(attr, values[attr])
+        }
+        formData.append('photo', file)
+
+        createProduct(formData).then( (res)=> {
+            console.log(res);
+            form.resetFields()
+            setAdded(true)
+
+        }).catch(err=> {
+            message.error(err.response.data.error)
+        }).finally(()=>{
+            console.log('提交创建商品');
+        })
+        
+    }
 
     useEffect(() => {
         async function getlist() {
             const { data } = await getCategories()
-            // console.log(data);
             setCategories(data)
         }
         getlist()
     }, [])
 
-    return (
-        <Layout title="添加商品">
-            <Form>
-                <Form.Item label="商品名称">
-                    <Input name="name" />
+    const showForm = () => {
+        return (
+            <Form onFinish={onFinish} initialValues={{category: '-1'}}>
+                <Form.Item label="商品名称" name="name" >
+                    <Input />
                 </Form.Item>
-                <Form.Item label="商品描述">
-                    <Input name="description" />
+                <Form.Item label="商品描述" name="description">
+                    <Input value="description" />
                 </Form.Item>
-                <Form.Item label="商品价格">
-                    <Input name="price" />
+                <Form.Item label="商品价格" name="price">
+                    <Input />
                 </Form.Item>
-                <Form.Item label="商品分类">
-                    <Select defaultValue='-1'>
-                        <Option value="-1">请选择分类</Option>
+                <Form.Item label="商品分类" name="category">
+                    <Select>
+                        <Select.Option value="-1">请选择分类</Select.Option>
                         {
                             categories.map(item => (
-                                <Option value={item.name} key={item._id}>{item.name}</Option>
+                                <Select.Option value={item._id} key={item._id}>
+                                    {item.name}
+                                </Select.Option>
                             ))
                         }
                     </Select>
                 </Form.Item>
-                <Form.Item label="商品数量">
-                    <Input name="quantity" />
+                <Form.Item label="商品数量" name="quantity">
+                    <Input />
                 </Form.Item>
-                <Form.Item label="是否配送">
-                    <Select defaultValue="0">
-                        <Option key="0" value="0">否</Option>
-                        <Option key="1" value="1">是</Option>
+                <Form.Item label="是否配送" name="shipping">
+                    <Select>
+                        <Select.Option value="1">是</Select.Option>
+                        <Select.Option value="0">否</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label="商品封面">
-                    <Upload>
+                    <Upload {...props}>
                         <Button icon={<UploadOutlined />}>添加商品封面</Button>
                     </Upload>
                 </Form.Item>
@@ -62,6 +91,31 @@ function AddProduct () {
                 </Button>
                 <Button type="primary" htmlType="submit">确认添加</Button>
             </Form>
+        )
+    }
+    const showSuccess = () => {
+        return (
+            <Result
+                status="success"
+                title="已添加成功"
+                extra={[
+                <>
+                    <Button type="" key="bank dashboard">
+                        <Link to="/admin/dashboard">返回 dashboard</Link>
+                    </Button>
+                    <Button type="primary" key="success" onClick={()=>{
+                        setAdded(false)
+                    }}>
+                        继续添加
+                    </Button>
+                </>
+            ]} />
+        )
+    }
+
+    return (
+        <Layout title="添加商品">
+            {added ? showSuccess(): showForm()}
         </Layout>
     )
 }
