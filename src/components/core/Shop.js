@@ -34,11 +34,8 @@ function Shop() {
         setSkip(cur+4)}}>加载更多</Button>
     )
   }
-  const showEmty = () => {
-    return (
-      <Empty />
-    )
-  }
+  const showEmty = () => <Empty />
+  
 
   return (
     <Layout title="拉钩严选商城列表" subTitle="挑选你喜欢的商品吧">
@@ -65,9 +62,7 @@ function Shop() {
               }
             </Row>
             <Row>
-              {
-                size < 4 ? showEmty() : showMoreBtn()
-              }
+              {size < 4 ? showEmty() : showMoreBtn()}
             </Row>
           </Space>
         </Col>

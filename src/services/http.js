@@ -20,3 +20,7 @@ export const searchProduct = params => {
 export const filterProducts = data => {
     return request.post('/products/filter', data)
 }
+// 根据产品ID获取产品信息
+export const getProductById = id => {
+    return request.get(`/product/${id}`)
+}
