@@ -10,3 +10,9 @@ export const getProducts = params => {
         params
     })
 }
+//  产品搜索
+export const searchProduct = params => {
+    return request.get('/products/search', {
+        params
+    })
+}
