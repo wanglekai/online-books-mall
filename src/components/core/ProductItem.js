@@ -1,17 +1,19 @@
-import { Button, Card, Col, Row, Typography } from 'antd'
+import { Button, Card, Col, Image, Row, Typography } from 'antd'
 import dateFormat from 'dateformat';
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { API } from '../../config';
 
 const { Title, Paragraph } = Typography
 
 function ProductItem ({product}) {
 
-    const { name, price, description, quantity, createdAt, category } = product
+    const { name, price, description, quantity, createdAt, category, _id } = product
 
     return (
         <Card
-            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+            cover={
+                <Image alt="product-image" src={`${API}/product/photo/${_id}`} />}
             actions={[
                 <Button type="link"><Link to="/product/xxx">查看详情</Link></Button>,
                 <Button type="link">加入购物车</Button>
