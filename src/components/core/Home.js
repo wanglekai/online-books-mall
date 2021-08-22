@@ -1,14 +1,21 @@
-
-import React from 'react'
-// import { useSelector } from "react-redux"
+import React, { useEffect } from 'react'
 import Layout from "./Layout"
 import Search from './Search'
 import { Typography, Row, Col } from 'antd'
 import ProductItem from './ProductItem'
+import { useDispatch } from 'react-redux'
+import { get_products } from '../../store/actions/products'
 
 const { Title } = Typography
 
 function Home () {
+
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(get_products({ sortBy: 'sold',limit: 2, order: 'desc'}))
+    dispatch(get_products({ sortBy: 'createdAt',limit: 2, order: 'desc'}))
+  }, [])
+
   return (
     <Layout title="拉钩严选首页" subTitle="尽情享受吧">
       <Search />
