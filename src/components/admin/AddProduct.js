@@ -1,13 +1,15 @@
 import { UploadOutlined } from '@ant-design/icons'
 import { Button, Form, Input, Select, Upload, Result, message } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { createProduct, getCategories } from '../../services/admin'
+import { createProduct } from '../../services/admin'
 import Layout from '../core/Layout'
+import getCategories from '../../helpers/getCategories'
 
 function AddProduct () {
 
-    const [categories, setCategories] = useState([])
+    const categories = getCategories()
+
     const [form] = Form.useForm()
     const [file, setFile] = useState()
     const [added, setAdded] = useState(false)
@@ -39,17 +41,10 @@ function AddProduct () {
         
     }
 
-    useEffect(() => {
-        async function getlist() {
-            const { data } = await getCategories()
-            setCategories(data)
-        }
-        getlist()
-    }, [])
 
     const showForm = () => {
         return (
-            <Form onFinish={onFinish} initialValues={{category: '-1'}}>
+            <Form onFinish={onFinish} initialValues={{'category': '-1'}}>
                 <Form.Item label="商品名称" name="name" >
                     <Input />
                 </Form.Item>

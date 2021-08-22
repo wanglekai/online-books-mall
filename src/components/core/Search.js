@@ -1,17 +1,24 @@
 import React from 'react'
 import { Button, Col, Divider, Form, Input, Row, Select } from 'antd'
-import ProductItem from './ProductItem'
+// import ProductItem from './ProductItem'
+import getGategories from '../../helpers/getCategories'
 
 function Search () {
+
+    const categories = getGategories()
+
     return (
         <>
             <Form layout="inline" initialValues={{category: 'All'}}>
                 <Input.Group compact>
                     <Form.Item name="category">
                         <Select>
-                            <Select.Option value="All">All</Select.Option>
-                            <Select.Option value="1">1</Select.Option>
-                            <Select.Option value="2">2</Select.Option>
+                            <Select.Option value="All">所有分类</Select.Option>
+                            {
+                                categories.map(item => (
+                                    <Select.Option key={item._id} value={item._id}>{item.name}</Select.Option>
+                                ))
+                            }
                         </Select>
                     </Form.Item>
                     <Form.Item>
@@ -25,7 +32,7 @@ function Search () {
             <Divider />
             <Row gutter={[16, 16]}>
                 <Col span={4}>
-                    <ProductItem />
+                    {/* <ProductItem /> */}
                 </Col>
             </Row>
         </>

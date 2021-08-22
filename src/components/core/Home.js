@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Layout from "./Layout"
-// import Search from './Search'
+import Search from './Search'
 import { Typography, Row, Col } from 'antd'
 import ProductItem from './ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,7 +21,7 @@ function Home () {
 
   return (
     <Layout title="拉钩严选首页" subTitle="尽情享受吧">
-      {/* <Search /> */}
+      <Search />
 
       <Title level={5} style={{marginTop: 10}}>最新上架</Title>
       <Row gutter={[16, 16]}>

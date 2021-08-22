@@ -12,10 +12,7 @@ export const createCategory = data => {
         }
     })
 }
-// 获取分类列表
-export const getCategories = () => {
-    return request.get('/categories')
-}
+
 
 // 创建商品
 export const createProduct = formData => {
