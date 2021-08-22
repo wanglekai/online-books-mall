@@ -16,3 +16,7 @@ export const searchProduct = params => {
         params
     })
 }
+// 商品过滤
+export const filterProducts = data => {
+    return request.post('/products/filter', data)
+}
