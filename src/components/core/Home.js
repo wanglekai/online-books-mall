@@ -5,6 +5,7 @@ import { Typography, Row, Col } from 'antd'
 import ProductItem from './ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { get_products } from '../../store/actions/products'
+import Loading from '../../helpers/loading'
 
 const { Title } = Typography
 
@@ -35,15 +36,17 @@ function Home () {
       </Row>
 
       <Title level={5} style={{marginTop: 10}}>最受欢迎</Title>
-      <Row gutter={[16, 16]}>
-         {
-            sold.map(product => (
-              <Col key={product._id} span={4}>
-                  <ProductItem product={product} />
-              </Col>
-            ))
-          }
+      <Loading>
+        <Row gutter={[16, 16]}>
+          {
+              sold.map(product => (
+                <Col key={product._id} span={4}>
+                    <ProductItem product={product} />
+                </Col>
+              ))
+            }
       </Row>
+      </Loading>
     </Layout>
   )
 }

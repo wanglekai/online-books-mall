@@ -6,6 +6,7 @@ import Layout from "./Layout"
 import { useDispatch, useSelector } from "react-redux"
 import { filter_products } from '../../store/actions/filter'
 import ProductItem from './ProductItem'
+import Loading from '../../helpers/loading'
 
 function Shop() {
   // const state = useSelector(state => state)
@@ -52,15 +53,17 @@ function Shop() {
         </Col>
         <Col span="20">
           <Space size="large" direction="vertical">
-            <Row gutter={[16, 16]}>
-              {
-                data.map(item => (
-                  <Col span={6} key={item._id}>
-                    <ProductItem product={item}  key={item._id}/>
-                  </Col>
-                ))
-              }
-            </Row>
+            <Loading>
+              <Row gutter={[16, 16]}>
+                {
+                  data.map(item => (
+                    <Col span={6} key={item._id}>
+                      <ProductItem product={item}  key={item._id}/>
+                    </Col>
+                  ))
+                }
+              </Row>
+            </Loading>
             <Row>
               {size < 4 ? showEmty() : showMoreBtn()}
             </Row>

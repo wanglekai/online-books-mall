@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { createProduct } from '../../services/admin'
 import Layout from '../core/Layout'
 import getCategories from '../../helpers/getCategories'
+import Loading from '../../helpers/loading'
 
 function AddProduct () {
 
@@ -33,10 +34,6 @@ function AddProduct () {
             form.resetFields()
             setAdded(true)
 
-        }).catch(err=> {
-            message.error(err.response.data.error)
-        }).finally(()=>{
-            console.log('提交创建商品');
         })
         
     }
@@ -45,41 +42,43 @@ function AddProduct () {
     const showForm = () => {
         return (
             <Form onFinish={onFinish} initialValues={{'category': '-1'}}>
-                <Form.Item label="商品名称" name="name" >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="商品描述" name="description">
-                    <Input value="description" />
-                </Form.Item>
-                <Form.Item label="商品价格" name="price">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="商品分类" name="category">
-                    <Select>
-                        <Select.Option value="-1">请选择分类</Select.Option>
-                        {
-                            categories.map(item => (
-                                <Select.Option value={item._id} key={item._id}>
-                                    {item.name}
-                                </Select.Option>
-                            ))
-                        }
-                    </Select>
-                </Form.Item>
-                <Form.Item label="商品数量" name="quantity">
-                    <Input />
-                </Form.Item>
-                <Form.Item label="是否配送" name="shipping">
-                    <Select>
-                        <Select.Option value="1">是</Select.Option>
-                        <Select.Option value="0">否</Select.Option>
-                    </Select>
-                </Form.Item>
-                <Form.Item label="商品封面">
-                    <Upload {...props}>
-                        <Button icon={<UploadOutlined />}>添加商品封面</Button>
-                    </Upload>
-                </Form.Item>
+                <Loading>
+                    <Form.Item label="商品名称" name="name" >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="商品描述" name="description">
+                        <Input value="description" />
+                    </Form.Item>
+                    <Form.Item label="商品价格" name="price">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="商品分类" name="category">
+                        <Select>
+                            <Select.Option value="-1">请选择分类</Select.Option>
+                            {
+                                categories.map(item => (
+                                    <Select.Option value={item._id} key={item._id}>
+                                        {item.name}
+                                    </Select.Option>
+                                ))
+                            }
+                        </Select>
+                    </Form.Item>
+                    <Form.Item label="商品数量" name="quantity">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="是否配送" name="shipping">
+                        <Select>
+                            <Select.Option value="1">是</Select.Option>
+                            <Select.Option value="0">否</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item label="商品封面">
+                        <Upload {...props}>
+                            <Button icon={<UploadOutlined />}>添加商品封面</Button>
+                        </Upload>
+                    </Form.Item>
+                </Loading>
                
                 <Button>
                     <Link to='/admin/dashboard'>返回 Dashboard</Link>
