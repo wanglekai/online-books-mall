@@ -31,7 +31,7 @@ function Layout ({children, title, subTitle}) {
 
   return (
     <div>
-      <Menu mode="horizontal" selectedKeys={[router.location.pathname]}>
+      <Menu mode="horizontal" selectedKeys={[router.location.pathname]} className="center-container">
         <Menu.Item key="/">
           <Link to="/">首页</Link>
         </Menu.Item>
@@ -41,6 +41,7 @@ function Layout ({children, title, subTitle}) {
         { auth ? showAashboard() : showAuth() }
       </Menu>
       <PageHeader
+        style={{padding: '20px 7.5%'}}
         className="site-page-header jumbotron"
         title={title}
         subTitle={subTitle}/>

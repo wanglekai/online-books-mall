@@ -14,6 +14,7 @@ import Signup from './core/Signup';
 import AddCategory from './admin/AddCategory';
 import AddProduct from './admin/AddProduct';
 import ProDetail from './core/ProDetail';
+import Cart from './core/Cart';
 
 function Routes () {
   return (
@@ -22,6 +23,7 @@ function Routes () {
       <Route path="/shop" component={Shop} />
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
+      <Route path="/cart" component={Cart} />
       <PrivateAdmin path="/admin/dashboard" component={AdminDashboard} />
       <PrivateUser path="/user/dashboard" component={UserDashboard} />
       <Route path="/create/category" component={AddCategory} />
