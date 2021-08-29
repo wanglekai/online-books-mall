@@ -15,6 +15,7 @@ import AddCategory from './admin/AddCategory';
 import AddProduct from './admin/AddProduct';
 import ProDetail from './core/ProDetail';
 import Cart from './core/Cart';
+import Orders from './admin/Orders';
 
 function Routes () {
   return (
@@ -24,6 +25,7 @@ function Routes () {
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
       <Route path="/cart" component={Cart} />
+      <Route path="/orders" component={Orders} />
       <PrivateAdmin path="/admin/dashboard" component={AdminDashboard} />
       <PrivateUser path="/user/dashboard" component={UserDashboard} />
       <Route path="/create/category" component={AddCategory} />
